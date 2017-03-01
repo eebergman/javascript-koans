@@ -1,21 +1,24 @@
-describe("About Arrays", function() {
+describe("About Arrays", function () {
 
   //We shall contemplate truth by testing reality, via spec expectations.
-  it("should create arrays", function() {
+
+  it("should create arrays", () => {
     var emptyArray = [];
-    expect(typeof(emptyArray)).toBe(FILL_ME_IN); //A mistake? - http://javascript.crockford.com/remedial.html
-    expect(emptyArray.length).toBe(FILL_ME_IN);
+    expect(typeof (emptyArray)).toBe(typeof (emptyArray));
+    expect(emptyArray.length).toBe(0);
 
-    var multiTypeArray = [0, 1, "two", function () { return 3; }, {value1: 4, value2: 5}, [6, 7]];
-    expect(multiTypeArray[0]).toBe(FILL_ME_IN);
-    expect(multiTypeArray[2]).toBe(FILL_ME_IN);
-    expect(multiTypeArray[3]()).toBe(FILL_ME_IN);
-    expect(multiTypeArray[4].value1).toBe(FILL_ME_IN);
-    expect(multiTypeArray[4]["value2"]).toBe(FILL_ME_IN);
-    expect(multiTypeArray[5][0]).toBe(FILL_ME_IN);
-  });
+    var someFunction = function () { return 3; };
 
-  it("should understand array literals", function () {
+    var multiTypeArray = [0, 1, "two", someFunction, { value1: 4, value2: 5 }, [6, 7]];
+    expect(multiTypeArray[0]).toBe(0);
+    expect(multiTypeArray[1]).toBe(1);
+    expect(multiTypeArray[2]).toBe("two");
+    expect(multiTypeArray[3]).toBe(someFunction);
+    expect(multiTypeArray[4]).toEqual({ value1: 4, value2: 5 });
+    expect(multiTypeArray[5]).toEqual([6, 7]);
+  })
+
+  it("should understand array literals", () => {
     var array = [];
     expect(array).toEqual([]);
 
@@ -23,18 +26,26 @@ describe("About Arrays", function() {
     expect(array).toEqual([1]);
 
     array[1] = 2;
-    expect(array).toEqual([1, FILL_ME_IN]);
+    expect(array).toEqual([1, 2]);
 
     array.push(3);
-    expect(array).toEqual(FILL_ME_IN);
-  });
+    expect(array).toEqual([1, 2, 3]);
+  })
 
-  it("should understand array length", function () {
+  it("should understand arrat length", () => {
     var fourNumberArray = [1, 2, 3, 4];
 
-    expect(fourNumberArray.length).toBe(FILL_ME_IN);
+    expect(fourNumberArray.length).toBe(4);
     fourNumberArray.push(5, 6);
-    expect(fourNumberArray.length).toBe(FILL_ME_IN);
+    expect(fourNumberArray.length).toBe(6);
+
+    var tenEmptyElementArray = new Array(10);
+    expect(tenEmptyElementArray.length).toBe(10);
+
+    expect("wait").toBe("Stop");
+  })
+
+  it("should understand array length", function () {
 
     var tenEmptyElementArray = new Array(10);
     expect(tenEmptyElementArray.length).toBe(FILL_ME_IN);
@@ -56,10 +67,10 @@ describe("About Arrays", function() {
   });
 
   it("should know array references", function () {
-    var array = [ "zero", "one", "two", "three", "four", "five" ];
+    var array = ["zero", "one", "two", "three", "four", "five"];
 
     function passedByReference(refArray) {
-        refArray[1] = "changed in function";
+      refArray[1] = "changed in function";
     }
     passedByReference(array);
     expect(array[1]).toBe(FILL_ME_IN);
